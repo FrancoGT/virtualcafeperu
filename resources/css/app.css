@@ -1,0 +1,144 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.hidden {
+    display: none;
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 5rem;
+    }
+
+    body {
+        @apply text-ink;
+    }
+
+    :focus-visible {
+        @apply outline-none ring-2 ring-orange-500 ring-offset-2;
+    }
+}
+
+@layer components {
+    .container-site {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold transition
+            focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+    }
+
+    .btn-primary {
+        @apply btn bg-orange-500 text-white shadow-sm hover:bg-orange-600 active:bg-orange-700 focus-visible:ring-orange-500;
+    }
+
+    .btn-dark {
+        @apply btn bg-ink text-white hover:bg-ink-light focus-visible:ring-ink;
+    }
+
+    .btn-outline {
+        @apply btn border border-slate-200 bg-white text-ink hover:border-orange-500 hover:text-orange-600 focus-visible:ring-orange-500;
+    }
+
+    .btn-ghost-light {
+        @apply btn border border-white/30 text-white hover:bg-white/10 focus-visible:ring-white;
+    }
+
+    .card {
+        @apply rounded-2xl bg-white shadow-card ring-1 ring-slate-900/5;
+    }
+
+    .section-title {
+        @apply text-2xl sm:text-3xl font-extrabold tracking-tight text-ink;
+    }
+
+    .eyebrow {
+        @apply text-xs font-extrabold uppercase tracking-[.2em] text-orange-500;
+    }
+
+    .badge {
+        @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-bold;
+    }
+
+    .qty-btn {
+        @apply flex h-8 w-8 items-center justify-center rounded-full text-ink-muted transition hover:bg-orange-50 hover:text-orange-600 disabled:opacity-40 disabled:hover:bg-transparent;
+    }
+
+    /* ---------- Panel administrativo ---------- */
+
+    .btn-secondary {
+        @apply btn border border-slate-200 bg-white text-ink hover:bg-slate-50 focus-visible:ring-slate-400;
+    }
+
+    .btn-action {
+        @apply inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-semibold text-slate-600 transition
+            hover:bg-slate-100 hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500;
+    }
+
+    .icon-btn {
+        @apply inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-600 transition
+            hover:bg-slate-100 hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500;
+    }
+
+    .badge-success { @apply badge bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-600/20; }
+    .badge-warning { @apply badge bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-600/20; }
+    .badge-danger  { @apply badge bg-red-50 text-red-700 ring-1 ring-inset ring-red-600/20; }
+    .badge-info    { @apply badge bg-sky-50 text-sky-700 ring-1 ring-inset ring-sky-600/20; }
+    .badge-neutral { @apply badge bg-slate-100 text-slate-600 ring-1 ring-inset ring-slate-500/20; }
+
+    .form-label {
+        @apply mb-1.5 block text-sm font-semibold text-ink;
+    }
+
+    .form-input {
+        @apply block w-full rounded-lg border-slate-300 bg-white px-3 py-2.5 text-sm text-ink shadow-sm transition
+            placeholder:text-slate-400 focus:border-orange-500 focus:ring-orange-500;
+    }
+
+    .form-field[data-invalid] .form-input {
+        @apply border-red-400 focus:border-red-500 focus:ring-red-500;
+    }
+
+    .form-hint {
+        @apply mt-1.5 text-xs text-ink-muted;
+    }
+
+    .form-error {
+        @apply mt-1.5 text-xs font-semibold text-red-600;
+    }
+
+    .table-admin {
+        @apply w-full text-left text-sm;
+    }
+
+    .table-admin thead th {
+        @apply whitespace-nowrap border-b border-slate-200 bg-slate-50 px-4 py-3 text-xs font-bold uppercase tracking-wider text-ink-muted;
+    }
+
+    .table-admin tbody td {
+        @apply border-b border-slate-100 px-4 py-3.5 align-middle text-slate-700;
+    }
+
+    .table-admin tbody tr {
+        @apply transition-colors hover:bg-slate-50;
+    }
+
+    .table-admin tbody tr:last-child td {
+        @apply border-b-0;
+    }
+
+    .scrollbar-none {
+        scrollbar-width: none;
+    }
+
+    .scrollbar-none::-webkit-scrollbar {
+        display: none;
+    }
+}
