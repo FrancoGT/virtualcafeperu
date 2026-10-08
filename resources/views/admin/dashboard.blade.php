@@ -3,9 +3,7 @@
 ]">
 
     <x-admin.page-header title="Hola, {{ auth()->user()->name }}" description="Resumen general de la tienda.">
-        <a href="{{ route('admin.products.create') }}" class="btn-primary">
-            <i class="fa-solid fa-plus" aria-hidden="true"></i> Nuevo producto
-        </a>
+        
     </x-admin.page-header>
 
     {{-- Filtro por categoría (GET ?category_id) --}}
