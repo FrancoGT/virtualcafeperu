@@ -7,6 +7,59 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Despliegue en Render (base de datos remota)
+
+La app se despliega en Render usando el `Dockerfile` del repositorio. El archivo `.env` **no** se sube a la imagen, así que todas las variables deben configurarse en **Render → tu servicio → Environment**.
+
+### Aplicación
+
+| Variable | Valor de ejemplo | Notas |
+|---|---|---|
+| `APP_NAME` | `VirtualCafePeru` | |
+| `APP_ENV` | `production` | |
+| `APP_KEY` | `base64:...` | Generar en local con `php artisan key:generate --show` |
+| `APP_DEBUG` | `false` | No usar `true` en producción |
+| `APP_URL` | `https://tu-servicio.onrender.com` | URL pública que asigna Render |
+| `LOG_CHANNEL` | `stderr` | Para ver los logs en el panel de Render |
+| `LOG_LEVEL` | `error` | |
+
+### Base de datos remota (MySQL)
+
+| Variable | Valor de ejemplo | Notas |
+|---|---|---|
+| `DB_CONNECTION` | `mysql` | |
+| `DB_HOST` | `mysql-xxxx.proveedor.com` | Host del proveedor (Aiven, Railway, PlanetScale, Clever Cloud, etc.) |
+| `DB_PORT` | `3306` | Algunos proveedores usan un puerto distinto |
+| `DB_DATABASE` | `virtualcafeperu` | |
+| `DB_USERNAME` | `usuario` | |
+| `DB_PASSWORD` | `********` | |
+| `DATABASE_URL` | `mysql://usuario:clave@host:3306/basedatos` | *Opcional.* Alternativa a las variables `DB_*` anteriores; si se define, tiene prioridad |
+| `MYSQL_ATTR_SSL_CA` | `/etc/ssl/certs/ca-certificates.crt` | *Opcional.* Solo si el proveedor exige conexión SSL |
+
+> El servidor de base de datos debe aceptar conexiones externas (desde cualquier IP o desde las IPs de salida de Render).
+
+### Sesiones, caché y colas
+
+| Variable | Valor | Notas |
+|---|---|---|
+| `SESSION_DRIVER` | `database` | Requiere la tabla `sessions` en la base remota |
+| `CACHE_DRIVER` | `file` | |
+| `QUEUE_CONNECTION` | `sync` | |
+| `FILESYSTEM_DRIVER` | `local` | |
+
+### Migraciones
+
+El `Dockerfile` **no** ejecuta migraciones al arrancar. Antes del primer despliegue, crea las tablas en la base remota, por ejemplo desde tu máquina local apuntando el `.env` a la base remota:
+
+```bash
+php artisan migrate --force
+php artisan db:seed --force   # si necesitas datos iniciales
+```
+
+O desde la pestaña **Shell** del servicio en Render: `php artisan migrate --force`.
+
+Después de cambiar variables de entorno en Render, haz un **Manual Deploy** para que `php artisan config:cache` vuelva a leerlas.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
