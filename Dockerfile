@@ -37,10 +37,8 @@ RUN composer dump-autoload --optimize --no-dev \
 ENV PORT=10000
 EXPOSE 10000
 
-CMD sed -i "s/Listen 80/Listen ${PORT}/" /etc/apache2/ports.conf \
-    && sed -i "s/<VirtualHost \*:80>/<VirtualHost *:${PORT}>/" /etc/apache2/sites-available/000-default.conf \
-    && php artisan package:discover --ansi \
-    && php artisan storage:link || true \
-    && php artisan config:cache \
-    && php artisan view:cache \
-    && apache2-foreground
+# Las cachés de Laravel se generan al arrancar (docker/start.sh), con las
+# variables de entorno reales de Render; nunca durante el build.
+RUN sed -i 's/\r$//' docker/start.sh && chmod +x docker/start.sh
+
+CMD ["docker/start.sh"]
