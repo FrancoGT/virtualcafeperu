@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Http\Livewire\PedidosPendientes;
 use App\Services\CartService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -70,7 +71,7 @@ class CartController extends Controller
             ]);
         }
 
-        DB::transaction(function () use ($cart) {
+        $order = DB::transaction(function () use ($cart) {
             $order = new Order();
             $order->user_id = Auth::check() ? Auth::id() : config('app.anonymous_user_id'); // Usuario anónimo
             $order->status = 'pending'; // Estado inicial de la orden
@@ -84,6 +85,8 @@ class CartController extends Controller
                 $orderDetail->price = $productDetails['price'];
                 $orderDetail->save();
             }
+
+            return $order;
         });
 
         $cart->clear();
@@ -91,7 +94,8 @@ class CartController extends Controller
         return redirect(url('/') . '#pedidos')->with('swal', [
             'icon' => 'success',
             'title' => '¡Pedido registrado!',
-            'text' => 'Notifícalo por WhatsApp para que lo preparemos.'
+            'text' => 'Último paso: envíanos tu pedido por WhatsApp para que lo preparemos.',
+            'whatsapp' => PedidosPendientes::whatsappLink($order->load('orderDetails.product')),
         ]);
     }
 

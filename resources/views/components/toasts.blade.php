@@ -32,6 +32,9 @@
         .swal2-popup .swal2-actions button.swal2-cancel:hover { background-color: #e2e8f0; }
         .swal2-popup .swal2-actions button.swal2-deny { background-color: #ef4444; color: #fff; }
         .swal2-popup .swal2-actions button.swal2-deny:hover { background-color: #dc2626; }
+        .swal2-popup .swal2-actions button.swal2-confirm.swal-whatsapp { background-color: #25D366; color: #fff; }
+        .swal2-popup .swal2-actions button.swal2-confirm.swal-whatsapp:hover { background-color: #1ebe5a; }
+        .swal2-popup .swal2-actions button.swal2-confirm.swal-whatsapp:focus { box-shadow: 0 0 0 3px rgba(37, 211, 102, .4) !important; }
         .swal2-toast.swal2-popup { border-radius: 1rem; padding: .75rem 1rem; box-shadow: 0 2px 4px rgba(15, 23, 42, .06), 0 12px 32px rgba(15, 23, 42, .12); }
         .swal2-toast .swal2-title { font-size: .9rem; font-weight: 700; color: #0f172a; margin: 0 .5rem; }
         .swal2-timer-progress-bar { background: rgba(249, 115, 22, .6); }
@@ -93,6 +96,23 @@
                 timerProgressBar: icon === 'success',
             });
 
+            // Pedido recién creado: el botón principal envía el pedido por WhatsApp.
+            // window.open se llama dentro del click para que el navegador no lo bloquee como popup.
+            window.whatsappModal = ({ title = '', text = '', link }) => Swal.fire({
+                ...brand,
+                icon: 'success',
+                title,
+                text,
+                showCancelButton: true,
+                confirmButtonText: '<i class="fa-brands fa-whatsapp" aria-hidden="true"></i>&nbsp; Enviar pedido por WhatsApp',
+                cancelButtonText: 'Más tarde',
+                customClass: { confirmButton: 'swal-whatsapp' },
+                allowOutsideClick: false,
+                didOpen: (el) => {
+                    Swal.getConfirmButton().addEventListener('click', () => window.open(link, '_blank', 'noopener'));
+                },
+            });
+
             window.confirmAction = ({ title = '¿Estás seguro?', text = '', icon = 'warning', confirmText = 'Sí, continuar', cancelText = 'Cancelar' } = {}) =>
                 Swal.fire({
                     ...brand,
@@ -131,6 +151,12 @@
         document.addEventListener('DOMContentLoaded', () => {
             @if ($error)
                 window.alertModal({ icon: 'error', title: 'Algo salió mal', text: @js($error) });
+            @elseif (!empty($flash['whatsapp']))
+                window.whatsappModal(@js([
+                    'title' => $flash['title'] ?? '',
+                    'text' => $flash['text'] ?? '',
+                    'link' => $flash['whatsapp'],
+                ]));
             @else
                 window.alertModal(@js([
                     'icon' => $flash['icon'] ?? 'success',
