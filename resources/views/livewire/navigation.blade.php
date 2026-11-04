@@ -31,7 +31,7 @@
         <div class="ml-auto flex items-center gap-2">
             {{-- Cuenta --}}
             @auth
-                <x-jet-dropdown align="right" width="48">
+                <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button type="button" class="flex items-center gap-2 rounded-full p-1 pr-3 transition hover:bg-white/10"
                             aria-label="Menú de cuenta">
@@ -47,30 +47,30 @@
                             {{ __('Cuenta') }}
                         </div>
 
-                        <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                        <x-dropdown-link href="{{ route('profile.show') }}">
                             <i class="fa-regular fa-user mr-2 w-4 text-slate-400" aria-hidden="true"></i>{{ __('Perfil') }}
-                        </x-jet-dropdown-link>
+                        </x-dropdown-link>
 
-                        <x-jet-dropdown-link href="{{ route('home') }}#pedidos">
+                        <x-dropdown-link href="{{ route('home') }}#pedidos">
                             <i class="fa-solid fa-receipt mr-2 w-4 text-slate-400" aria-hidden="true"></i>{{ __('Mis pedidos') }}
-                        </x-jet-dropdown-link>
+                        </x-dropdown-link>
 
                         @role('admin')
-                            <x-jet-dropdown-link href="{{ route('admin.dashboard') }}">
+                            <x-dropdown-link href="{{ route('admin.dashboard') }}">
                                 <i class="fa-solid fa-gauge mr-2 w-4 text-slate-400" aria-hidden="true"></i>{{ __('Administración') }}
-                            </x-jet-dropdown-link>
+                            </x-dropdown-link>
                         @endrole
 
                         <div class="border-t border-slate-100"></div>
 
                         <form method="POST" action="{{ route('logout') }}" x-data>
                             @csrf
-                            <x-jet-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
+                            <x-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
                                 <i class="fa-solid fa-arrow-right-from-bracket mr-2 w-4 text-slate-400" aria-hidden="true"></i>{{ __('Cerrar Sesión') }}
-                            </x-jet-dropdown-link>
+                            </x-dropdown-link>
                         </form>
                     </x-slot>
-                </x-jet-dropdown>
+                </x-dropdown>
             @else
                 <a href="{{ route('login') }}"
                     class="hidden rounded-full px-4 py-2 text-sm font-bold text-slate-300 transition hover:bg-white/10 hover:text-white sm:inline-flex">

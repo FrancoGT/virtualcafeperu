@@ -19,8 +19,7 @@
         <!-- Styles -->
         @livewireStyles
 
-        <!-- Scripts -->
-        <script src="https://unpkg.com/alpinejs@3.14.1/dist/cdn.min.js" defer></script>
+        <!-- Alpine viene incluido en @livewireScripts -->
     </head>
     <body class="bg-slate-50">
         <div class="font-sans text-ink antialiased">

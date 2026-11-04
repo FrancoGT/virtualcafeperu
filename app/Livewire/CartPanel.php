@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
-use App\Http\Livewire\Concerns\InteractsWithCart;
+use App\Livewire\Concerns\InteractsWithCart;
 use App\Models\Product;
 use App\Services\CartService;
 use Livewire\Component;

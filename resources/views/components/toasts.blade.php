@@ -3,8 +3,8 @@
 
     - session('swal')  => ['icon', 'title', 'text']  → modal (desde controladores)
     - session('error') => 'mensaje'                  → modal de error
-    - Evento de navegador "notify" {type, message}   → toast (Livewire: dispatchBrowserEvent('notify', ...))
-    - Evento de navegador "swal"   {icon, title, text} → modal (Livewire: dispatchBrowserEvent('swal', ...))
+    - Evento de navegador "notify" {type, message}   → toast (Livewire: $this->dispatch('notify', type: ..., message: ...))
+    - Evento de navegador "swal"   {icon, title, text} → modal (Livewire: $this->dispatch('swal', icon: ..., ...))
     - window.confirmAction({title, text, ...})       → Promise<boolean>, reemplaza a confirm()
     - <form data-confirm="¿Seguro?">                 → pide confirmación antes de enviar
       (opcionales: data-confirm-title, data-confirm-button, data-confirm-icon)
@@ -125,7 +125,7 @@
                     focusCancel: true,
                 }).then((r) => r.isConfirmed);
 
-            // Eventos desde Livewire (dispatchBrowserEvent) o JS
+            // Eventos desde Livewire ($this->dispatch) o JS
             window.addEventListener('notify', (e) => window.toast(e.detail.type, e.detail.message));
             window.addEventListener('swal', (e) => window.alertModal(e.detail));
 

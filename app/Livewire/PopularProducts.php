@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
-use App\Http\Livewire\Concerns\InteractsWithCart;
+use App\Livewire\Concerns\InteractsWithCart;
 use App\Models\OrderDetail;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;

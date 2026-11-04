@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Concerns;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
 
 /**
  * Campo de imagen de los formularios del admin (componente x-admin.image-input):
@@ -56,7 +56,10 @@ trait HandlesImageInput
         if ($request->hasFile('image')) {
             // Guardar siempre en formato .png
             $path = $model->localImagePath();
-            Image::make($request->file('image')->getRealPath())->encode('png')->save(Storage::disk('public')->path($path));
+            ImageManager::gd()
+                ->read($request->file('image')->getRealPath())
+                ->toPng()
+                ->save(Storage::disk('public')->path($path));
 
             $model->rememberLocalImagePath($path);
             $model->external_image_url = null;

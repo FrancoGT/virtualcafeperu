@@ -46,7 +46,7 @@
                                 <p class="text-lg font-black">S/ {{ number_format($order->total, 2) }}</p>
                             </div>
 
-                            <a href="{{ \App\Http\Livewire\PedidosPendientes::whatsappLink($order) }}" target="_blank" rel="noopener"
+                            <a href="{{ \App\Livewire\PedidosPendientes::whatsappLink($order) }}" target="_blank" rel="noopener"
                                 class="btn mt-4 w-full bg-[#25D366] text-white hover:bg-[#1ebe5a] focus-visible:ring-[#25D366]">
                                 <i class="fa-brands fa-whatsapp text-lg" aria-hidden="true"></i>
                                 Notificar por WhatsApp

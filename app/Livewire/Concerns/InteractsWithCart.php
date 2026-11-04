@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Concerns;
+namespace App\Livewire\Concerns;
 
 use App\Models\Product;
 use App\Services\CartService;
@@ -21,7 +21,7 @@ trait InteractsWithCart
             return $this->notify('error', $error);
         }
 
-        $this->emit('cartUpdated');
+        $this->dispatch('cartUpdated');
         $this->notify('success', $product->name . ' se añadió a tu pedido.');
     }
 
@@ -31,7 +31,7 @@ trait InteractsWithCart
 
         if (!$product) {
             app(CartService::class)->remove($productId);
-            $this->emit('cartUpdated');
+            $this->dispatch('cartUpdated');
 
             return;
         }
@@ -42,19 +42,19 @@ trait InteractsWithCart
             $this->notify('error', $error);
         }
 
-        $this->emit('cartUpdated');
+        $this->dispatch('cartUpdated');
     }
 
     public function removeFromCart($productId)
     {
         app(CartService::class)->remove($productId);
 
-        $this->emit('cartUpdated');
+        $this->dispatch('cartUpdated');
         $this->notify('info', 'Producto quitado de tu pedido.');
     }
 
     protected function notify(string $type, string $message)
     {
-        $this->dispatchBrowserEvent('notify', ['type' => $type, 'message' => $message]);
+        $this->dispatch('notify', type: $type, message: $message);
     }
 }
