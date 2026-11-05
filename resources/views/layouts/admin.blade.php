@@ -19,7 +19,7 @@
 
     @livewireStyles
 
-    <!-- Alpine (sidebar, menú de usuario, toasts y previews) viene incluido en @livewireScripts -->
+    {{-- Alpine (sidebar, menú de usuario, toasts y previews) viene incluido en @livewireScripts --}}
 
     <script>
         // Estado del sidebar: abierto por defecto en escritorio (recuerda si el usuario lo ocultó), cerrado en móvil

@@ -22,7 +22,7 @@
         <!-- Styles -->
         @livewireStyles
 
-        <!-- Alpine (con el plugin focus) viene incluido en @livewireScripts -->
+        {{-- Alpine (con el plugin focus) viene incluido en @livewireScripts --}}
     </head>
     <body class="font-sans antialiased bg-slate-50">
         <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] btn-primary">
