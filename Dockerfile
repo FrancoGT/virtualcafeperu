@@ -1,5 +1,5 @@
-# Laravel 8.83 -> PHP 8.1 (misma versión que el entorno local)
-FROM php:8.1-apache
+# Laravel 13 -> PHP 8.4 (misma versión que el entorno local)
+FROM php:8.4-apache
 
 # Dependencias del sistema y extensiones PHP requeridas
 RUN apt-get update && apt-get install -y --no-install-recommends \
