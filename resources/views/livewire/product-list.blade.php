@@ -157,7 +157,7 @@
                 <label for="menu-search" class="sr-only">Buscar en el menú</label>
                 <div class="relative">
                     <i class="fa-solid fa-magnifying-glass pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" aria-hidden="true"></i>
-                    <input id="menu-search" type="search" wire:model.debounce.350ms="search" autocomplete="off"
+                    <input id="menu-search" type="search" wire:model.live.debounce.350ms="search" autocomplete="off"
                         placeholder="Busca empanadas, capuchino, postres…"
                         class="w-full rounded-full border-0 bg-white py-3 pl-11 pr-11 text-sm shadow-card ring-1 ring-slate-900/5 placeholder:text-slate-400 focus:ring-2 focus:ring-orange-500">
                     <span class="absolute right-4 top-1/2 -translate-y-1/2 text-orange-500" wire:loading.delay aria-hidden="true">

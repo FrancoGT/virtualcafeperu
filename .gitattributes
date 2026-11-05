@@ -8,3 +8,6 @@
 
 /.github export-ignore
 CHANGELOG.md export-ignore
+
+# Scripts de shell ejecutados en Linux (Docker)
+*.sh text eol=lf

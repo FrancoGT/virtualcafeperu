@@ -7,15 +7,13 @@ use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function test_example()
-    {
-        $response = $this->get('/');
+    use RefreshDatabase;
 
-        $response->assertStatus(200);
+    /**
+     * La tienda (con sus componentes Livewire) carga sin errores.
+     */
+    public function test_the_application_returns_a_successful_response(): void
+    {
+        $this->get('/')->assertStatus(200);
     }
 }

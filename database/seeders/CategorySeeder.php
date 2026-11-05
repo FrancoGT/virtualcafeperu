@@ -32,7 +32,8 @@ class CategorySeeder extends Seeder
         ];
         foreach($categories as $category)
         {
-            $category = Category::factory(1)->create($category)->first();
+            // forceCreate: "status" no está en $fillable y no dependemos de Faker (no se instala con --no-dev)
+            Category::forceCreate($category);
         }
     }
 }

@@ -6,6 +6,12 @@
     RewriteEngine On
 
     # Redirect Trailing Slashes...
+    # Detrás del proxy HTTPS de Render Apache recibe HTTP y construiría la
+    # redirección como http://; con X-Forwarded-Proto se conserva https.
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{HTTP:X-Forwarded-Proto} =https
+    RewriteRule ^(.*)/$ https://%{HTTP_HOST}/$1 [L,R=301]
+
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)/$ /$1 [L,R=301]
 

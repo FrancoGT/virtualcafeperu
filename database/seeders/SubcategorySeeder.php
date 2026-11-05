@@ -73,7 +73,9 @@ class SubcategorySeeder extends Seeder
         ];
         foreach ($subcategories as $subcategory)
         {
-            Subcategory::factory(1)->create($subcategory);
+            // Sin factory: Faker no se instala en producción (--no-dev).
+            // La columna image no admite null; ' ' = sin imagen (ver Subcategory::image_url).
+            Subcategory::create($subcategory + ['image' => ' ']);
         }
     }
 }
