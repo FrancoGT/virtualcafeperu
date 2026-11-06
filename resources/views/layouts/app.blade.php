@@ -9,20 +9,17 @@
 
         <title>{{ isset($title) ? $title . ' · ' : '' }}{{ config('app.name') }}</title>
 
-        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
 
-        <!---- Favicon ---->
         <link rel="icon" href="{{ asset('img/caramellalogo.png') }}" type="image/png">
 
-        <!-- Styles -->
         @livewireStyles
 
-        <!-- Alpine (con el plugin focus) viene incluido en @livewireScripts -->
+        {{-- Alpine (con el plugin focus) viene incluido en @livewireScripts --}}
     </head>
     <body class="font-sans antialiased bg-slate-50">
         <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] btn-primary">
@@ -42,7 +39,6 @@
                 </header>
             @endisset
 
-            <!-- Page Content -->
             <main id="main" class="flex-1">
                 {{ $slot }}
             </main>

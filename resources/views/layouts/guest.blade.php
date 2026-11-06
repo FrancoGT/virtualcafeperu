@@ -19,7 +19,7 @@
         <!-- Styles -->
         @livewireStyles
 
-        <!-- Alpine viene incluido en @livewireScripts -->
+        {{-- Alpine viene incluido en @livewireScripts --}}
     </head>
     <body class="bg-slate-50">
         <div class="font-sans text-ink antialiased">
